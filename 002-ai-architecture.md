@@ -3,10 +3,7 @@
 
 ```mermaid
 flowchart LR
-  FE[Frontend (TS)] -->|generated client| API[Backend API (Go)]
-  API --> DOM[Domain / Usecases]
-  DOM --> DB[(DB)]
-  API --> OBS[Observability]
+  A[Start] --> B[End]
 ```
 
 ## TL;DR
