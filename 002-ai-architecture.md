@@ -1,6 +1,14 @@
 # AI協業開発におけるレール設計（草案）
 *更新日: 2026-02-03*
 
+```mermaid
+flowchart LR
+  FE[Frontend (TS)] -->|generated client| API[Backend API (Go)]
+  API --> DOM[Domain / Usecases]
+  DOM --> DB[(DB)]
+  API --> OBS[Observability]
+```
+
 ## TL;DR
 AIを「一貫した判断主体」として信頼するのではなく、曖昧さを含む文脈から次の一手を生成する**確率的な生成過程**として扱う。
 
