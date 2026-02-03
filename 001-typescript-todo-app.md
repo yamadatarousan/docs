@@ -1,4 +1,3 @@
-# TypeScript Todo App 技術スタック
 
 ## 概要
 - シンプルなTodoWebアプリケーション
