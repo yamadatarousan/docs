@@ -3,7 +3,28 @@
 
 ```mermaid
 flowchart LR
-  A[Start] --> B[End]
+  dev["Human review"] --> oas["contracts/openapi (OpenAPI primary)"]
+  dev --> mig["contracts/migrations (migration defs)"]
+  dev --> bt["contracts/boundary (assumption tests)"]
+  dev --> ar["architecture rules (static checks)"]
+
+  ai["AI generation (exploration)"] --> pr["Pull Request"]
+  oas --> pr
+  mig --> pr
+  bt --> pr
+  ar --> pr
+
+  pr --> ci["CI gates (fixation checkpoints)"]
+  ci --> g1["OpenAPI validate + diff"]
+  g1 --> g2["If breaking: require migration def"]
+  g2 --> g3["Codegen + diff check"]
+  g3 --> g4["Static structure checks"]
+  g4 --> g5["Boundary assumption tests"]
+  g5 --> g6["Domain property tests"]
+  g6 --> merge["Merge = fixation"]
+  g6 --> fb["Failure report"]
+  fb --> dev
+  fb --> ai
 ```
 
 ## TL;DR
