@@ -1,32 +1,6 @@
 # AI協業開発におけるレール設計（草案）
 *更新日: 2026-02-03*
 
-```mermaid
-flowchart LR
-  dev["Human review"] --> oas["contracts/openapi (OpenAPI primary)"]
-  dev --> mig["contracts/migrations (migration defs)"]
-  dev --> bt["contracts/boundary (assumption tests)"]
-  dev --> ar["architecture rules (static checks)"]
-
-  ai["AI generation (exploration)"] --> pr["Pull Request"]
-  oas --> pr
-  mig --> pr
-  bt --> pr
-  ar --> pr
-
-  pr --> ci["CI gates (fixation checkpoints)"]
-  ci --> g1["OpenAPI validate + diff"]
-  g1 --> g2["If breaking: require migration def"]
-  g2 --> g3["Codegen + diff check"]
-  g3 --> g4["Static structure checks"]
-  g4 --> g5["Boundary assumption tests"]
-  g5 --> g6["Domain property tests"]
-  g6 --> merge["Merge = fixation"]
-  g6 --> fb["Failure report"]
-  fb --> dev
-  fb --> ai
-```
-
 ## TL;DR
 AIを「一貫した判断主体」として信頼するのではなく、曖昧さを含む文脈から次の一手を生成する**確率的な生成過程**として扱う。
 
